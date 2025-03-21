@@ -121,7 +121,7 @@ const GrandList = () => {
   }
 
   let counterValue = value.length
-
+  let color="red"
 
   return (
     <div className="p-3 mb-2 bg-body-secondary"> <h1 id="title"> BIG TASK </h1>
