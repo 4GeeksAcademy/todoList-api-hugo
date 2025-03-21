@@ -8,28 +8,61 @@ const GrandList = () => {
   const [value, setValue] = useState([]);
   const [div, setDiv] = useState("");
   const [user, setUser] = useState("");
-  const [colorLaber, setColorLabel] = useState("red")
 
-
-  const changeColor = (id, label) => {
-    const handleUpdateTask = async () => {
-      try {
-        const data = await ApiTodoList.updateTask(id, label)
-
-      } catch (error) {
-        console.log(error)
+  const handleChecK = async () => {
+    try {
+      const request = await ApiTodoList.checkTaskUser(user);
+      setValue(request.todos)
+    }
+    catch (error) {
+    }
+  }
+  const handleCreateTask = async () => {
+    try {
+      const data = await ApiTodoList.creattask(user, div)
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+  const hsndleUser = async () => {
+    try {
+      const data = await ApiTodoList.createUser(user)
+      if (data.detail === "User already exists.") {
+        try {
+          const data = await ApiTodoList.checkTaskUser(user)
+          if (data.todos.length === 0) {
+            swal({
+              title: "WELLCOME",
+              text: `MR.${user}. Don´t have any task pending.
+                 Add any task`,
+              button: "ACEPT",
+              timer: 4000
+            });
+          } else {
+            setValue(data.todos)
+          }
+        }
+        catch (error) {
+        }
       }
     }
-    handleUpdateTask();
-    setTimeout(() => {
-      handleChecK();
-    }, 500);
-
+    catch (error) {
+    }
   }
 
+  const pressEnterUser = (e) => {
+    if (e.keyCode === 13) {
+      if (user !== "") { 
+        hsndleUser() }
+    }
+  }
 
-  let color = colorLaber
-
+  const pressEnter = (e) => {
+    if (e.keyCode === 13) {
+      addTarea()
+    }
+  }
   const getTarea = (e) => {
     setDiv(e.target.value)
 
@@ -49,66 +82,18 @@ const GrandList = () => {
     setDiv("")
   }
 
-  const handleChecK = async () => {
-    try {
-      const request = await ApiTodoList.checkTaskUser(user);
-      setValue(request.todos)
-    }
-    catch (error) {
-    }
-  }
-
-  const handleCreateTask = async () => {
-    try {
-      const data = await ApiTodoList.creattask(user, div)
-    }
-    catch (error) {
-      console.log(error)
-    }
-  }
-
-
-
-  const hsndleUser = async () => {
-    try {
-      const data = await ApiTodoList.createUser(user)
-      if (data.detail === "User already exists.") {
-        try {
-          const data = await ApiTodoList.checkTaskUser(user)
-          if (data.todos.length === 0) {
-            swal({
-              title: "WELLCOME",
-              text: `MR.${user}. Don´t have any task pending.
-                 Add any task`,
-              button: "ACEPT",
-              timer: 4000
-            });
-          } else {
-            setValue(data.todos)
-          }
-          console.log(data)
-        }
-        catch (error) {
-          console.log(error)
-        }
-
+  const changeColor = (id, label) => {
+    const handleUpdateTask = async () => {
+      try {
+        const data = await ApiTodoList.updateTask(id, label)
+      } catch (error) {
       }
     }
-    catch (error) {
-      console.log(error)
-    }
-  }
+    handleUpdateTask();
+    setTimeout(() => {
+      handleChecK();
+    }, 500);
 
-  const pressEnterUser = (e) => {
-    if (e.keyCode === 13) {
-      if (user !== "") { hsndleUser() }
-    }
-  }
-
-  const pressEnter = (e) => {
-    if (e.keyCode === 13) {
-      addTarea()
-    }
   }
 
   const deleteTarea = (id) => {
