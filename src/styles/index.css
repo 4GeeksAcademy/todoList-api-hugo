@@ -1,11 +1,74 @@
-/* 
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+.list-group{
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
 
-*/
+.p-3{
+    
+    margin: 0 auto;
+    width: 80%;
+    height: 700px;
+    text-align: center;
+}
+#one{
+    margin:0 auto;
+    width: 58%;
+    height: 5px;
+    border-radius: 3px;
+    border-bottom: 1px;
+}
+#two{
+    margin:0 auto;
+    width: 57%;
+    height: 5px;
+    border-radius: 3px;
+    border-top: 5px rgb(234, 236, 239);
+}
+.liDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between
+
+}
+.text{
+    margin-top: 7px;
+    margin-left: 10px;
+}
+
+#text{
+    display: block;
+    opacity: 0.26;
+    height: 30px ;
+    font-size: 12px;
+    justify-items: left;
+    
+}
+#title{
+    color:rgb(214, 86, 86);
+    opacity: 0.26;
+    font-family: "Montserrat", sans-serif;
+    font-size:100px;
+    
+}
+.liDiv:hover button{
+   visibility: visible;
+}
+.btn-close{
+    visibility: hidden;
+    margin-top: 7px;
+}
+.user{
+    padding-top: 50px;
+    margin-top: 200px;
+    margin: 0 auto;
+    width: 30%;
+}
+.twobtn{
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    margin-right: 20px;
+}
